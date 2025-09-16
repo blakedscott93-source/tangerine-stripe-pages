@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tangerine • Payment Canceled</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,sans-serif;background:#0b0f1a;color:#fff;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0}
+    .card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:24px 28px;max-width:560px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    a.button{display:inline-block;margin-top:16px;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.2);text-decoration:none;color:#fff}
+    .muted{opacity:.8;font-size:14px}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Payment canceled</h1>
+    <p class="muted">No problem — you can upgrade anytime. If your extension didn’t return automatically, use the button below.</p>
+    <a class="button" href="/" id="return">Return to Tangerine</a>
+  </div>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const sessionId = params.get("session_id") || null;
+    window.postMessage({ type: "STRIPE_CANCEL", sessionId }, "*");
+    console.log("[Stripe Cancel] posted message with sessionId:", sessionId);
+  </script>
+</body>
+</html>
